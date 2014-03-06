@@ -6,12 +6,7 @@
 
 - (void)pluginInitialize
 {
-    _pController = [BXPrinterController getInstance];
-    _pController.delegate = self;
-    _pController.lookupCount = 5;
-    _pController.AutoConnection = BXL_CONNECTIONMODE_NOAUTO;
-    [_pController open];
-    [_pController lookup];
+    NSLog(@"init");
 }
 
 //
@@ -81,6 +76,13 @@ withError:(NSError *)error
 
 - (void)printText:(CDVInvokedUrlCommand*)command
 {
+    _pController = [BXPrinterController getInstance];
+    _pController.delegate = self;
+    _pController.lookupCount = 5;
+    _pController.AutoConnection = BXL_CONNECTIONMODE_NOAUTO;
+    [_pController open];
+    [_pController lookup];
+
     CDVPluginResult* pluginResult = nil;
     NSString* text = [command.arguments objectAtIndex:0];
 
