@@ -30,7 +30,7 @@
     </config-file>
     
     <!-- Bixolon SDK -->
-    <source-file src="src/ios/lib/Headers/libBXSDK.a" framework="true" />
+    <source-file src="src/ios/lib/libBXSDK.a" framework="true" />
     <header-file src="src/ios/lib/Headers/BXBarcodeInfo.h" />
     <header-file src="src/ios/lib/Headers/BXCode.h" />
     <header-file src="src/ios/lib/Headers/BXPrinterControlDelegate.h" />
