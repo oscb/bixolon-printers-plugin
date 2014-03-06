@@ -6,7 +6,7 @@ window.printText = function(str) {
         function(err) {
             alert("Can't Print");
         }, 
-        "BixolonPrinter", 
+        "BixolonPlugin", 
         "printText", 
         [str]);
 };
