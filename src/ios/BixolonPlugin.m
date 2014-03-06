@@ -1,13 +1,11 @@
-/********* Echo.m Cordova Plugin Implementation *******/
+/********* BixolonPlugin.m Cordova Plugin Implementation *******/
 
 #import "BixolonPlugin.h"
-#import "BXPrinterController.h"
-#import <Cordova/CDV.h>
 
 @implementation BixolonPlugin
 
 - (void)pluginInitialize
-
+{
     _pController = [BXPrinterController getInstance];
     _pController.delegate = self;
     _pController.lookupCount = 5;
@@ -35,7 +33,7 @@
         _pController.characterSet = 16;
         [_pController printText:text];
         [_pController printText:@"\r\n"];
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:echo];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
     } else {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
     }

@@ -1,10 +1,12 @@
-/********* Echo.h Cordova Plugin Header *******/
+/********* BixolonPlugin.h Cordova Plugin Header *******/
 
 #import <Cordova/CDV.h>
+#import "BXPrinterController.h"
 
 @interface BixolonPlugin : CDVPlugin<BXPrinterControlDelegate>
-
-BXPrinterController* _pController;
+{
+    BXPrinterController* _pController;
+}
 
 - (void)pluginInitialize;
 
