@@ -10,6 +10,16 @@
 
 - (void)pluginInitialize;
 
+- (void)willLookupPrinters:(BXPrinterController *)controller;
+- (void)didLookupPrinters:(BXPrinterController *)controller;
+- (void)willConnect:(BXPrinterController *)controller printer:(BXPrinter *)printer;
+- (void)didConnect:(BXPrinterController *)controller printer:(BXPrinter *)printer;
+- (void)didNotConnect:(BXPrinterController *)controller printer:(BXPrinter *)printer withError:(NSError *)error;
+- (void)didDisconnect:(BXPrinterController *)controller printer:(BXPrinter *)printer;
+- (void)didBeBrokenConnection:(BXPrinterController *)controller printer:(BXPrinter *)printer withError:(NSError *)error;
+- (void)didFindPrinter:(BXPrinterController *)controller printer:(BXPrinter *)printer;
+
+
 - (void)printText:(CDVInvokedUrlCommand*)command;
 
 @end

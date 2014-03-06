@@ -17,62 +17,6 @@
 //
 // Delegate Mehtods
 //
-- (void)message:(BXPrinterController *)controller
-text:(NSString *)text
-{
-    NSLog(@"[Sample message] %@", text);
-
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"sample" message:text delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-    [alert release];
-}
-
-
-
--(void)didUpdateStatus:(BXPrinterController*) controller
-status:(NSNumber*) status
-{
-    NSLog(@"didUpdateStatus");
-}
-
-
-- (void)msrArrived:(BXPrinterController *)controller
-track:(NSNumber *)track
-{
-    NSLog(@"msrArrived");
-    
-    
-    [_uiButtonMSR setTitle:@"MSR Ready" forState:UIControlStateNormal];
-
-    NSData  *data = nil;
-    if( [track intValue] & BXL_MSG_TRACK1 )
-    {
-        if( BXL_SUCCESS == [controller msrGetTrack:BXL_MSG_TRACK1 response:&data] )
-        {
-            _uiTextFieldTrack1.text = [NSString stringWithFormat:@"%s", data.bytes];
-        }
-    }
-    if( [track intValue] & BXL_MSG_TRACK1 )
-    {
-        if( BXL_SUCCESS == [controller msrGetTrack:BXL_MSG_TRACK2 response:&data] )
-        {
-            _uiTextFieldTrack2.text = [NSString stringWithFormat:@"%s", data.bytes];
-        }
-    }
-    if( [track intValue] & BXL_MSG_TRACK1 )
-    {
-        if( BXL_SUCCESS == [controller msrGetTrack:BXL_MSG_TRACK3 response:&data] )
-        {
-            _uiTextFieldTrack3.text = [NSString stringWithFormat:@"%s", data.bytes];
-        }
-    }
-}
-
-- (void)msrTerminated:(BXPrinterController *)controller
-{
-    NSLog(@"msrTerminated");
-}
-
 - (void)willLookupPrinters:(BXPrinterController *)controller
 {
     NSLog(@"willLookupPrinters");
@@ -145,6 +89,7 @@ withError:(NSError *)error
         _pController.textEncoding = 0x0C;
         _pController.characterSet = 16;
         [_pController printText:text];
+        [_pController printText:@"\r\n"];
         [_pController printText:@"\r\n"];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
     } else {
