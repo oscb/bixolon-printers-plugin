@@ -1,10 +1,10 @@
 /********* Echo.m Cordova Plugin Implementation *******/
 
-#import "BixolonPrinter.h"
+#import "BixolonPlugin.h"
 #import "BXPrinterController.h"
 #import <Cordova/CDV.h>
 
-@implementation BixolonPrinter
+@implementation BixolonPlugin
 
 - (void)pluginInitialize
 

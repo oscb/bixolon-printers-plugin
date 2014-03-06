@@ -2,7 +2,7 @@
 
 #import <Cordova/CDV.h>
 
-@interface BixolonPrinter : CDVPlugin<BXPrinterControlDelegate>
+@interface BixolonPlugin : CDVPlugin<BXPrinterControlDelegate>
 
 BXPrinterController* _pController;
 
