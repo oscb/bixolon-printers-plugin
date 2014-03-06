@@ -86,7 +86,7 @@ withError:(NSError *)error
 
     if (text != nil && [text length] > 0) {
         // Print things
-        NSLog("printing");
+        NSLog(@"printing");
         _pController.textEncoding = 0x0C;
         _pController.characterSet = 16;
         [_pController printText:text];
