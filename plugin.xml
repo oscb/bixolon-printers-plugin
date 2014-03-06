@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    id="com.saturn5.plugin.bixolon-printer"
+    version="1.0.0">
+
+  <name>Bixolon Printers</name>
+  <author>Oscar Bazaldúa @ Saturn5</author>
+  <description>
+    Bixolon Thermal Printers plugin.
+  </description>
+
+  <engines>
+    <engine name="cordova" version=">=3.0.0" />
+  </engines>
+
+  <!-- Javascript -->
+  <asset src="www/BixolonPlugin.js" target="plugins/BixolonPlugin.js" />
+
+  <!-- ios -->
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*/plugins">
+      <plugin name="BixolonPlugin" value="BixolonPlugin" onload="true" />
+    </config-file>
+
+    <config-file target="config.xml" parent="/widget">
+      <feature name="BixolonPlugin">
+        <param name="ios-package" value="BixolonPlugin"/>
+        <param name="onload" value="true" />
+      </feature>
+    </config-file>
+    
+    <!-- Bixolon SDK -->
+    <source-file src="src/ios/lib/Headers/libBXSDK.a" framework="true" />
+    <header-file src="src/ios/lib/Headers/BXBarcodeInfo.h" />
+    <header-file src="src/ios/lib/Headers/BXCode.h" />
+    <header-file src="src/ios/lib/Headers/BXPrinterControlDelegate.h" />
+    <header-file src="src/ios/lib/Headers/BXPrinterController.h" />
+    <header-file src="src/ios/lib/Headers/BXPrinterObjects.h" />
+    <header-file src="src/ios/lib/Headers/Common.h" />
+    <header-file src="src/ios/lib/Headers/Defines.h" />
+    <header-file src="src/ios/lib/Headers/iControllerDelegate.h" />
+    <header-file src="src/ios/lib/Headers/InterfaceFunctionsDelegate.h" />
+    <header-file src="src/ios/lib/Headers/NetFunctionsDelegate.h" />
+    <header-file src="src/ios/lib/Headers/UDPServerDelegate.h" />
+    <!-- Bixolon Functions Plugin -->
+    <header-file src="src/ios/BixolonPlugin.h" />
+    <source-file src="src/ios/BixolonPlugin.m" />
+
+  </platform>
+</plugin>
