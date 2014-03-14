@@ -105,22 +105,14 @@ withError:(NSError *)error
     NSString* alignment = [command.arguments objectAtIndex:1]; // p.32
     NSString* textSize = [command.arguments objectAtIndex:2]; // p.32
 
-    // Test
-    _pController.textEncoding = 0x0C;     //Español Encoding
-    _pController.characterSet = 16;       //WPC 1252 charaterset
-    [_pController printText:@"=================================\r\n"];
-    [_pController printText:text];
-    [_pController printText:@"=================================\r\n\r\n"];
-
     if (text != nil && [text length] > 0) {
         _pController.textEncoding = 0x0C; // Español
         _pController.characterSet = 16; // Español
         // _pController.alignment = BXL_ALIGNMENT_LEFT;
         // _pController.textSize = BXL_TS_0WIDTH| BXL_TS_1HEIGHT;
-        if (BXL_SUCCESS == [_pController printText:text]) 
-            NSLog(@"Printed Success");
-        else
-            NSLog(@"Printed Fail");
+        [_pController printText:@"=================================\r\n"];
+        [_pController printText:text];
+        [_pController printText:@"=================================\r\n\r\n"];
         NSLog(@"Printing: ");
         NSLog(text);
         // [_pController printText:@"\r\n"];
