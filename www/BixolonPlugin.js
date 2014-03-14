@@ -33,7 +33,6 @@ var BX_Printer = {
         cordova.exec(
             function(success){
                 this.connected = true;
-                alert('Connected!');
                 success_callback();
             }, 
             function(err) {
@@ -49,7 +48,6 @@ var BX_Printer = {
         cordova.exec(
             function(success){
                 this.connected = false;
-                alert('DisConnected!');
                 success_callback();
             }, 
             function(err) {
@@ -64,7 +62,6 @@ var BX_Printer = {
     printText: function(str, success_callback, error_callback) {
         cordova.exec(
             function(success){
-                alert('Printed!');
                 success_callback();
             }, 
             function(err) {
@@ -79,7 +76,6 @@ var BX_Printer = {
     cutPaper: function(success_callback, error_callback) {
         cordova.exec(
             function(success){
-                alert('Cut!');
                 success_callback();
             }, 
             function(err) {

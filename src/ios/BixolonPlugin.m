@@ -110,9 +110,7 @@ withError:(NSError *)error
         _pController.characterSet = 16; // Español
         // _pController.alignment = BXL_ALIGNMENT_LEFT;
         // _pController.textSize = BXL_TS_0WIDTH| BXL_TS_1HEIGHT;
-        [_pController printText:@"=================================\r\n"];
         [_pController printText:text];
-        [_pController printText:@"=================================\r\n\r\n"];
         NSLog(@"Printing: ");
         NSLog(text);
         // [_pController printText:@"\r\n"];
