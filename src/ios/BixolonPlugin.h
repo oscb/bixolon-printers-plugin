@@ -6,6 +6,7 @@
 @interface BixolonPlugin : CDVPlugin<BXPrinterControlDelegate>
 {
     BXPrinterController* _pController;
+    long disconnect_id;
 }
 
 - (void)pluginInitialize;
