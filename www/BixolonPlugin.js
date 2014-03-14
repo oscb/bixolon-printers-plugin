@@ -6,7 +6,7 @@ var Alignment = {
 
 var TextSize = {
     BXL_TS_0WIDTH: 0,
-    BXL_TS_1WIDTH: 16
+    BXL_TS_1WIDTH: 16,
     BXL_TS_2WIDTH: 32,
     BXL_TS_3WIDTH: 48,
     BXL_TS_4WIDTH: 64,
