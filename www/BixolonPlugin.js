@@ -29,54 +29,62 @@ var BX_Printer = {
     alignment: Alignment.BXL_ALIGNMENT_LEFT,
     textSize: TextSize.BXL_TS_0WIDTH | TextSize.BXL_TS_1HEIGHT,
 
-    connect: function() {
+    connect: function(success_callback, error_callback) {
         cordova.exec(
             function(success){
                 this.connected = true;
                 alert('Connected!');
+                success_callback();
             }, 
             function(err) {
                 alert("Can't Connect");
+                error_callback();
             }, 
             "BixolonPlugin", 
             "connect", 
             []);
     },
 
-    disconnect: function() {
+    disconnect: function(success_callback, error_callback) {
         cordova.exec(
             function(success){
                 this.connected = false;
                 alert('DisConnected!');
+                success_callback();
             }, 
             function(err) {
                 alert("Can't disconnect");
+                error_callback();
             }, 
             "BixolonPlugin", 
             "disconnect", 
             []);
     },
 
-    printText: function(str) {
+    printText: function(str, success_callback, error_callback) {
         cordova.exec(
             function(success){
                 alert('Printed!');
+                success_callback();
             }, 
             function(err) {
                 alert("Can't Print");
+                error_callback();
             }, 
             "BixolonPlugin", 
             "printText", 
             [str, this.alignment, this.textSize]);
     },
 
-    cutPaper: function() {
+    cutPaper: function(success_callback, error_callback) {
         cordova.exec(
             function(success){
                 alert('Cut!');
+                success_callback();
             }, 
             function(err) {
                 alert("Can't Cut");
+                error_callback();
             }, 
             "BixolonPlugin", 
             "cutPaper", 

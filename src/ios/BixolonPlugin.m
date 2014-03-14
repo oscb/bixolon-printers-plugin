@@ -111,6 +111,7 @@ withError:(NSError *)error
         _pController.alignment = BXL_ALIGNMENT_LEFT;
         _pController.textSize = BXL_TS_0WIDTH| BXL_TS_1HEIGHT;
         [_pController printText:text];
+        NSLog(text);
         // [_pController printText:@"\r\n"];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
     } else {
