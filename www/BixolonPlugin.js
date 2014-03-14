@@ -2,7 +2,7 @@ var Alignment = {
     BXL_ALIGNMENT_LEFT: 0,
     BXL_ALIGNMENT_CENTER: 1,
     BXL_ALIGNMENT_RIGHT: 2
-}
+};
 
 var TextSize = {
     BXL_TS_0WIDTH: 0,
@@ -22,7 +22,7 @@ var TextSize = {
     BXL_TS_5HEIGHT: 5,
     BXL_TS_6HEIGHT: 6,
     BXL_TS_7HEIGHT: 7
-}
+};
 
 var BX_Printer = {
     connected: false,
