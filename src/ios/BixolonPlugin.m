@@ -99,8 +99,8 @@ withError:(NSError *)error
     if (text != nil && [text length] > 0) {
         _pController.textEncoding = 0x0C; // Español
         _pController.characterSet = 16; // Español
-        pController.alignment = BXL_ALIGNMENT_LEFT;
-        pController.textSize = BXL_TS_0WIDTH| BXL_TS_1HEIGHT;
+        _pController.alignment = BXL_ALIGNMENT_LEFT;
+        _pController.textSize = BXL_TS_0WIDTH| BXL_TS_1HEIGHT;
         [_pController printText:text];
         // [_pController printText:@"\r\n"];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
@@ -113,8 +113,8 @@ withError:(NSError *)error
 - (void)lineFeed:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult = nil;
-    int lines = [command.arguments objectAtIndex:0];
-    if (BXL_SUCCESS == [pController lineFeed:lines]) 
+    int lines = [[command.arguments objectAtIndex:0] integerValue] ;
+    if (BXL_SUCCESS == [_pController lineFeed:lines])
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Line Feed Complete"];
     else 
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: Can't line feed"];
@@ -124,8 +124,8 @@ withError:(NSError *)error
 - (void)printBitmap:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult = nil;
-    NSString *path = [[NSBundle mainBundle] pathForResource:@”Sample” ofType:@”png”]];
-    if (BXL_SUCCESS == [pController printBitmap:path width:BXL_WIDTH_FULL level:1050 ])
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Sample" ofType:@"png"];
+    if (BXL_SUCCESS == [_pController printBitmap:path width:BXL_WIDTH_FULL level:1050 ])
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Printed Image"];
     else 
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: Can't print Image"];
@@ -135,7 +135,7 @@ withError:(NSError *)error
 - (void)cutPaper:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult = nil;
-    if(BXL_SUCCESS == [pController cutPaper])
+    if(BXL_SUCCESS == [_pController cutPaper])
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Paper Cut"];
     else
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: Can't cut paper"];
