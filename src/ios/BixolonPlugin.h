@@ -20,11 +20,11 @@
 - (void)didFindPrinter:(BXPrinterController *)controller printer:(BXPrinter *)printer;
 
 - (void)connect:(CDVInvokedUrlCommand*)command;
+- (void)disconnect:(CDVInvokedUrlCommand*)command;
 - (void)printText:(CDVInvokedUrlCommand*)command;
 - (void)lineFeed:(CDVInvokedUrlCommand*)command;
 - (void)printBitmap:(CDVInvokedUrlCommand*)command;
 - (void)cutPaper:(CDVInvokedUrlCommand*)command;
-- (void)printText:(CDVInvokedUrlCommand*)command;
 
 
 @end

@@ -57,7 +57,10 @@ withError:(NSError *)error
 - (void)didDisconnect:(BXPrinterController *)controller
 printer:(BXPrinter *)printer
 {
+    CDVPluginResult* pluginResult = nil;
     NSLog(@"didDisconnect");
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"DisConnection"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void)didBeBrokenConnection:(BXPrinterController *)controller
@@ -87,6 +90,11 @@ withError:(NSError *)error
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Connection Established"];
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+- (void)disconnect:(CDVInvokedUrlCommand*)command
+{
+    [_pController disconnect]
 }
 
 - (void)printText:(CDVInvokedUrlCommand*)command
