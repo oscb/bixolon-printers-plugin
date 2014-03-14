@@ -109,7 +109,7 @@ withError:(NSError *)error
     _pController.textEncoding = 0x0C;     //Español Encoding
     _pController.characterSet = 16;       //WPC 1252 charaterset
     [_pController printText:@"=================================\r\n"];
-    [_pController printText:text]
+    [_pController printText:text];
     [_pController printText:@"=================================\r\n\r\n"];
 
     if (text != nil && [text length] > 0) {
