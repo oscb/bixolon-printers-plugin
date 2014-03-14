@@ -29,7 +29,7 @@ var BX_Printer = {
     alignment: Alignment.BXL_ALIGNMENT_LEFT,
     textSize: TextSize.BXL_TS_0WIDTH | TextSize.BXL_TS_1HEIGHT,
 
-    connect = function() {
+    connect: function() {
         cordova.exec(
             function(success){
                 this.connected = true;
@@ -43,7 +43,7 @@ var BX_Printer = {
             []);
     },
 
-    disconnect = function() {
+    disconnect: function() {
         cordova.exec(
             function(success){
                 this.connected = false;
@@ -57,7 +57,7 @@ var BX_Printer = {
             []);
     },
 
-    printText = function(str) {
+    printText: function(str) {
         cordova.exec(
             function(success){
                 alert('Printed!');
@@ -70,7 +70,7 @@ var BX_Printer = {
             [str, this.alignment, this.textSize]);
     },
 
-    cutPaper = function() {
+    cutPaper: function() {
         cordova.exec(
             function(success){
                 alert('Cut!');
