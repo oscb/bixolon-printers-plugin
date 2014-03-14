@@ -108,8 +108,8 @@ withError:(NSError *)error
     if (text != nil && [text length] > 0) {
         _pController.textEncoding = 0x0C; // Español
         _pController.characterSet = 16; // Español
-        _pController.alignment = BXL_ALIGNMENT_LEFT;
-        _pController.textSize = BXL_TS_0WIDTH| BXL_TS_1HEIGHT;
+        // _pController.alignment = BXL_ALIGNMENT_LEFT;
+        // _pController.textSize = BXL_TS_0WIDTH| BXL_TS_1HEIGHT;
         if (BXL_SUCCESS == [_pController printText:text]) 
             NSLog(@"Printed Success");
         else
