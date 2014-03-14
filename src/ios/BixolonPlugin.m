@@ -105,6 +105,15 @@ withError:(NSError *)error
     NSString* alignment = [command.arguments objectAtIndex:1]; // p.32
     NSString* textSize = [command.arguments objectAtIndex:2]; // p.32
 
+    // Test
+    _pController.textEncoding = 0x0C;     //Español Encoding
+    _pController.characterSet = 16;       //WPC 1252 charaterset
+    [_pController printText:@"Default\r\n"];
+    [_pController printText:@"AÀáàâäæãå\r\nSŠšß\r\nEèéêë\r\nŸÿyûüùú\r\nÎîïíìôöòóœøõ\r\nÑñç\r\n"];
+    [_pController printText:@"abcdefghijklmn\r\n"];
+    [_pController printText:@"￥123$#@%^&*)#($*%(\r\n"];
+    [_pController printText:@"=================================\r\n\r\n"];
+
     if (text != nil && [text length] > 0) {
         _pController.textEncoding = 0x0C; // Español
         _pController.characterSet = 16; // Español
