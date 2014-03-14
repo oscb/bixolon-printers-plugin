@@ -19,7 +19,12 @@
 - (void)didBeBrokenConnection:(BXPrinterController *)controller printer:(BXPrinter *)printer withError:(NSError *)error;
 - (void)didFindPrinter:(BXPrinterController *)controller printer:(BXPrinter *)printer;
 
-
+- (void)connect:(CDVInvokedUrlCommand*)command;
 - (void)printText:(CDVInvokedUrlCommand*)command;
+- (void)lineFeed:(CDVInvokedUrlCommand*)command;
+- (void)printBitmap:(CDVInvokedUrlCommand*)command;
+- (void)cutPaper:(CDVInvokedUrlCommand*)command;
+- (void)printText:(CDVInvokedUrlCommand*)command;
+
 
 @end

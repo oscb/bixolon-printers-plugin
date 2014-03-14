@@ -26,11 +26,7 @@
 - (void)didLookupPrinters:(BXPrinterController *)controller
 {
     NSLog(@"didLookupPrinters");
-    
-    //Add 8
     [_pController selectTarget];
-    if( NO==[_pController connect] )
-        NSLog(@"Connect Error");
 }
 
 - (void)willConnect:(BXPrinterController *)controller
@@ -79,19 +75,34 @@ withError:(NSError *)error
     NSLog(_pController.target.address);
 }
 
+//
+// Plugin Functions
+// 
+- (void)connect:(CDVInvokedUrlCommand*)command
+{
+    CDVPluginResult* pluginResult = nil;
+    if( NO==[_pController connect] )
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: Can't connnect to printer"];
+    else
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Connection Established"];
+
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 - (void)printText:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult = nil;
     NSString* text = [command.arguments objectAtIndex:0];
+    NSString* alignment = [command.arguments objectAtIndex:1]; // p.32
+    NSString* textSize = [command.arguments objectAtIndex:2]; // p.32
 
     if (text != nil && [text length] > 0) {
-        // Print things
-        NSLog(@"printing");
-        _pController.textEncoding = 0x0C;
-        _pController.characterSet = 16;
+        _pController.textEncoding = 0x0C; // Español
+        _pController.characterSet = 16; // Español
+        pController.alignment = BXL_ALIGNMENT_LEFT;
+        pController.textSize = BXL_TS_0WIDTH| BXL_TS_1HEIGHT;
         [_pController printText:text];
-        [_pController printText:@"\r\n"];
-        [_pController printText:@"\r\n"];
+        // [_pController printText:@"\r\n"];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
     } else {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
@@ -99,4 +110,34 @@ withError:(NSError *)error
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
+- (void)lineFeed:(CDVInvokedUrlCommand*)command
+{
+    CDVPluginResult* pluginResult = nil;
+    int lines = [command.arguments objectAtIndex:0];
+    if (BXL_SUCCESS == [pController lineFeed:lines]) 
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Line Feed Complete"];
+    else 
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: Can't line feed"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+- (void)printBitmap:(CDVInvokedUrlCommand*)command
+{
+    CDVPluginResult* pluginResult = nil;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@”Sample” ofType:@”png”]];
+    if (BXL_SUCCESS == [pController printBitmap:path width:BXL_WIDTH_FULL level:1050 ])
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Printed Image"];
+    else 
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: Can't print Image"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+- (void)cutPaper:(CDVInvokedUrlCommand*)command
+{
+    CDVPluginResult* pluginResult = nil;
+    if(BXL_SUCCESS == [pController cutPaper])
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Paper Cut"];
+    else
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: Can't cut paper"];
+}
 @end
