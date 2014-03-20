@@ -92,11 +92,10 @@ withError:(NSError *)error
 - (void)disconnect:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult = nil;
-    disconnect_id = command.callbackId;
-    [_pController disconnect];
     NSLog(@"Disconnected");
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"DisConnection"];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:disconnect_id];
+    [_pController disconnect];
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Disconnection"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void)printText:(CDVInvokedUrlCommand*)command
