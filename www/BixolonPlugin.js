@@ -47,12 +47,13 @@ var BX_Printer = {
     disconnect: function(success_callback, error_callback) {
         cordova.exec(
             function(success){
+                alert("Disconnect");
                 this.connected = false;
-                success_callback();
+                // success_callback();
             }, 
             function(err) {
                 alert("Can't disconnect");
-                error_callback();
+                // error_callback();
             }, 
             "BixolonPlugin", 
             "disconnect", 
@@ -69,7 +70,7 @@ var BX_Printer = {
                 error_callback();
             }, 
             "BixolonPlugin", 
-            "printText", 
+            "printText",
             [str, this.alignment, this.textSize]);
     },
 
