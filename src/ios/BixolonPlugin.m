@@ -96,6 +96,7 @@ withError:(NSError *)error
 {
     disconnect_id = command.callbackId;
     [_pController disconnect];
+    NSLog(@"Disconnected");
 }
 
 - (void)printText:(CDVInvokedUrlCommand*)command

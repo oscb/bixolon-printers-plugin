@@ -27,5 +27,4 @@
 - (void)printBitmap:(CDVInvokedUrlCommand*)command;
 - (void)cutPaper:(CDVInvokedUrlCommand*)command;
 
-
 @end
