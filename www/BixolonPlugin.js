@@ -14,7 +14,7 @@ var TextSize = {
     BXL_TS_6WIDTH: 96,
     BXL_TS_7WIDTH: 112,
 
-    BXL_TS_0HEIGHT: 0, 
+    BXL_TS_0HEIGHT: 0,
     BXL_TS_1HEIGHT: 1,
     BXL_TS_2HEIGHT: 2,
     BXL_TS_3HEIGHT: 3,
@@ -34,29 +34,29 @@ var BX_Printer = {
             function(success){
                 this.connected = true;
                 success_callback();
-            }, 
+            },
             function(err) {
-                alert("Can't Connect");
+                console.log("Can't Connect");
                 error_callback();
-            }, 
-            "BixolonPlugin", 
-            "connect", 
+            },
+            "BixolonPlugin",
+            "connect",
             []);
     },
 
     disconnect: function(success_callback, error_callback) {
         cordova.exec(
             function(success){
-                alert("Disconnect");
+                console.log("Disconnect");
                 this.connected = false;
                 // success_callback();
-            }, 
+            },
             function(err) {
-                alert("Can't disconnect");
+                console.log("Can't disconnect");
                 // error_callback();
-            }, 
-            "BixolonPlugin", 
-            "disconnect", 
+            },
+            "BixolonPlugin",
+            "disconnect",
             []);
     },
 
@@ -64,12 +64,12 @@ var BX_Printer = {
         cordova.exec(
             function(success){
                 success_callback();
-            }, 
+            },
             function(err) {
-                alert("Can't Print");
+                console.log("Can't Print");
                 error_callback();
-            }, 
-            "BixolonPlugin", 
+            },
+            "BixolonPlugin",
             "printText",
             [str, this.alignment, this.textSize]);
     },
@@ -77,16 +77,15 @@ var BX_Printer = {
     cutPaper: function(success_callback, error_callback) {
         cordova.exec(
             function(success){
+                // Checar esta llamada
                 success_callback();
-            }, 
+            },
             function(err) {
-                alert("Can't Cut");
+                console.log("Can't Cut");
                 error_callback();
-            }, 
-            "BixolonPlugin", 
-            "cutPaper", 
+            },
+            "BixolonPlugin",
+            "cutPaper",
             []);
     }
-
-    // TODO: Add LineFeed and PrintBitmap
 };
