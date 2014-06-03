@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     id="com.saturn5.plugin.bixolon-printer"
-    version="1.0.0">
+    version="1.0.1">
 
-  <name>Bixolon Printers</name>
+  <name>BixolonPrinter</name>
   <author>Oscar Bazaldúa @ Saturn5</author>
   <description>
     Bixolon Thermal Printers plugin.
@@ -28,7 +28,7 @@
         <param name="onload" value="true" />
       </feature>
     </config-file>
-    
+
     <!-- Bixolon SDK -->
     <source-file src="src/ios/lib/libBXSDK.a" framework="true" />
     <header-file src="src/ios/lib/Headers/BXBarcodeInfo.h" />
