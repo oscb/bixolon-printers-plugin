@@ -20,7 +20,7 @@
 - (void)willLookupPrinters:(BXPrinterController *)controller
 {
     NSLog(@"willLookupPrinters");
-    
+
 }
 
 - (void)didLookupPrinters:(BXPrinterController *)controller
@@ -39,7 +39,7 @@ printer:(BXPrinter *)printer
 printer:(BXPrinter *)printer
 {
     NSLog(@"didConnect");
-    
+
     NSLog(@"=========== Information Printing Start  ===========\r\n");
     NSLog(@" * printer modelStr : %@ \r\n", printer.modelStr);
     NSLog(@" * printer address : %@ \r\n", printer.address);
@@ -77,7 +77,7 @@ withError:(NSError *)error
 
 //
 // Plugin Functions
-// 
+//
 - (void)connect:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult = nil;
@@ -128,7 +128,7 @@ withError:(NSError *)error
     int lines = [[command.arguments objectAtIndex:0] integerValue] ;
     if (BXL_SUCCESS == [_pController lineFeed:lines])
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Line Feed Complete"];
-    else 
+    else
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: Can't line feed"];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
@@ -139,7 +139,7 @@ withError:(NSError *)error
     NSString *path = [[NSBundle mainBundle] pathForResource:@"Sample" ofType:@"png"];
     if (BXL_SUCCESS == [_pController printBitmap:path width:BXL_WIDTH_FULL level:1050 ])
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Printed Image"];
-    else 
+    else
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: Can't print Image"];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
@@ -151,5 +151,16 @@ withError:(NSError *)error
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Paper Cut"];
     else
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: Can't cut paper"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+- (void)openDrawer:(CDVInvokedUrlCommand*)command
+{
+    CDVPluginResult* pluginResult = nil;
+    if(BXL_SUCCESS == [_pController openDrawer])
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Drawer Open"];
+    else
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: Can't open drawer"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 @end

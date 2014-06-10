@@ -87,5 +87,19 @@ var BX_Printer = {
             "BixolonPlugin",
             "cutPaper",
             []);
+    },
+
+    openDrawer: function(success_callback, error_callback) {
+      cordova.exec(
+        function(success) {
+          success_callback();
+        },
+        function(error) {
+          console.log("Can't Open Drawer");
+          error_callback();
+        },
+        "BixolonPlugin",
+        "openDrawer",
+        []);
     }
 };
