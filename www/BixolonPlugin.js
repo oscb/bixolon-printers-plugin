@@ -41,7 +41,7 @@ var BX_Printer = {
             },
             "BixolonPlugin",
             "connect",
-            []);
+            [str]);
     },
 
     disconnect: function(success_callback, error_callback) {

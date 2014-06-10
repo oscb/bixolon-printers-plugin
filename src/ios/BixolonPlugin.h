@@ -7,6 +7,7 @@
 {
     BXPrinterController* _pController;
     NSString* disconnect_id;
+    BXPrinter* _myTarget;
 }
 
 - (void)pluginInitialize;
