@@ -29,7 +29,7 @@ var BX_Printer = {
     alignment: Alignment.BXL_ALIGNMENT_LEFT,
     textSize: TextSize.BXL_TS_0WIDTH | TextSize.BXL_TS_1HEIGHT,
 
-    connect: function(success_callback, error_callback) {
+    connect: function(ip, success_callback, error_callback) {
         cordova.exec(
             function(success){
                 this.connected = true;
@@ -41,7 +41,7 @@ var BX_Printer = {
             },
             "BixolonPlugin",
             "connect",
-            [str]);
+            [ip]);
     },
 
     disconnect: function(success_callback, error_callback) {
