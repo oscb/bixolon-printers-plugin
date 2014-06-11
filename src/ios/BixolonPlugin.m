@@ -82,19 +82,18 @@ withError:(NSError *)error
 {
     CDVPluginResult* pluginResult = nil;
     NSString* ip = [command.arguments objectAtIndex:0];
-    
+
     if (_myTarget) {
-        [_myTarget release];
         _myTarget = nil;
     }
-    
+
     _myTarget = [BXPrinter new];
     _myTarget.address = ip;
     _myTarget.port = 9100;
     _myTarget.connectionClass = BXL_CONNECTIONCLASS_WIFI;
     _pController.target = _myTarget;
     [_pController selectTarget];
-    
+
     if( NO==[_pController connect] )
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: Can't connnect to printer"];
     else
@@ -109,10 +108,9 @@ withError:(NSError *)error
     NSLog(@"Disconnected");
     [_pController disconnect];
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Disconnection"];
-    
-    [_myTarget release];
+
     _myTarget = nil;
-    
+
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
