@@ -29,4 +29,7 @@
 - (void)cutPaper:(CDVInvokedUrlCommand*)command;
 - (void)openDrawer:(CDVInvokedUrlCommand*)command;
 
+- (void)atomicPrint:(CDVInvokedUrlCommand*)command;
+- (void)atomicOpen:(CDVInvokedUrlCommand*)command;
+
 @end

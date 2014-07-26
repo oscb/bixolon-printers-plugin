@@ -101,5 +101,35 @@ var BX_Printer = {
             "BixolonPlugin",
             "openDrawer",
             []);
-    }
+    },
+    // Atomic Print
+    print: function(ip, text, success_callback, error_callback) {
+      cordova.exec(
+        function (success) {
+          success_callback();
+        },
+        function (error) {
+          console.log("can't print");
+          error_callback();
+        },
+        "BixolonPlugin",
+        "atomicPrint",
+        [ip, text]
+      )
+    },
+    // Atomic Open Drawer
+    open: function(ip, success_callback, error_callback) {
+      cordova.exec(
+        function (success) {
+          success_callback();
+        },
+        function (error) {
+          console.log("can't print");
+          error_callback();
+        },
+        "BixolonPlugin",
+        "atomicOpen",
+        [ip]
+      )
+    },
 };
