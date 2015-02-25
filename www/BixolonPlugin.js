@@ -1,10 +1,10 @@
-var Alignment = {
+var BX_Alignment = {
     BXL_ALIGNMENT_LEFT: 0,
     BXL_ALIGNMENT_CENTER: 1,
     BXL_ALIGNMENT_RIGHT: 2
 };
 
-var TextSize = {
+var BX_WidthSize = {
     BXL_TS_0WIDTH: 0,
     BXL_TS_1WIDTH: 16,
     BXL_TS_2WIDTH: 32,
@@ -12,8 +12,10 @@ var TextSize = {
     BXL_TS_4WIDTH: 64,
     BXL_TS_5WIDTH: 80,
     BXL_TS_6WIDTH: 96,
-    BXL_TS_7WIDTH: 112,
+    BXL_TS_7WIDTH: 112
+};
 
+var BX_HeightSize = {
     BXL_TS_0HEIGHT: 0,
     BXL_TS_1HEIGHT: 1,
     BXL_TS_2HEIGHT: 2,
@@ -26,8 +28,10 @@ var TextSize = {
 
 var BX_Printer = {
     connected: false,
-    alignment: Alignment.BXL_ALIGNMENT_LEFT,
-    textSize: TextSize.BXL_TS_0WIDTH | TextSize.BXL_TS_1HEIGHT,
+    alignment: BX_Alignment.BXL_ALIGNMENT_LEFT,
+    widthSize: BX_WidthSize.BXL_TS_0WIDTH,
+    heightSize: BX_HeightSize.BXL_TS_1HEIGHT,
+    textSize: function() { return this.widthSize | this.heightSize;},
 
     connect: function(ip, success_callback, error_callback) {
         cordova.exec(
@@ -36,7 +40,7 @@ var BX_Printer = {
                 success_callback();
             },
             function(err) {
-                console.log("Can't Connect");
+                console.error("Can't Connect");
                 error_callback();
             },
             "BixolonPlugin",
@@ -47,12 +51,12 @@ var BX_Printer = {
     disconnect: function(success_callback, error_callback) {
         cordova.exec(
             function(success){
-                console.log("Disconnect");
+                console.info("Disconnect");
                 this.connected = false;
                 // success_callback();
             },
             function(err) {
-                console.log("Can't disconnect");
+                console.error("Can't disconnect");
                 // error_callback();
             },
             "BixolonPlugin",
@@ -66,12 +70,12 @@ var BX_Printer = {
                 success_callback();
             },
             function(err) {
-                console.log("Can't Print");
+                console.error("Can't Print");
                 error_callback();
             },
             "BixolonPlugin",
             "printText",
-            [str, this.alignment, this.textSize]);
+            [str, this.alignment, this.textSize()]);
     },
 
     cutPaper: function(success_callback, error_callback) {
@@ -81,7 +85,7 @@ var BX_Printer = {
                 success_callback();
             },
             function(err) {
-                console.log("Can't Cut");
+                console.error("Can't Cut");
                 error_callback();
             },
             "BixolonPlugin",
@@ -95,7 +99,7 @@ var BX_Printer = {
                 success_callback();
             },
             function(err) {
-                console.log("Can't Open Drawer");
+                console.error("Can't Open Drawer");
                 error_callback();
             },
             "BixolonPlugin",
@@ -103,33 +107,39 @@ var BX_Printer = {
             []);
     },
     // Atomic Print
-    print: function(ip, text, success_callback, error_callback) {
-      cordova.exec(
-        function (success) {
-          success_callback();
-        },
-        function (error) {
-          console.log("can't print");
-          error_callback();
-        },
-        "BixolonPlugin",
-        "atomicPrint",
-        [ip, text]
-      )
+    atomicPrint: function(ip, text, success_callback, error_callback) {
+        cordova.exec(
+            function (success) {
+                console.info(success);
+                if (success_callback)
+                    success_callback();
+            },
+            function (error) {
+                console.error("Can't print");
+                if (error_callback)
+                    error_callback();
+            },
+            "BixolonPlugin",
+            "atomicPrint",
+            [ip, text]
+        )
     },
     // Atomic Open Drawer
-    open: function(ip, success_callback, error_callback) {
-      cordova.exec(
-        function (success) {
-          success_callback();
-        },
-        function (error) {
-          console.log("can't print");
-          error_callback();
-        },
-        "BixolonPlugin",
-        "atomicOpen",
-        [ip]
-      )
-    },
+    atomicOpen: function(ip, success_callback, error_callback) {
+        cordova.exec(
+            function (success) {
+                console.info(success);
+                if (success_callback)
+                    success_callback();
+            },
+            function (error) {
+                console.error("Can't print");
+                if (error_callback)
+                    error_callback();
+            },
+            "BixolonPlugin",
+            "atomicOpen",
+            [ip]
+        )
+    }
 };

@@ -20,7 +20,7 @@
 - (void)willLookupPrinters:(BXPrinterController *)controller
 {
     NSLog(@"willLookupPrinters");
-    
+
 }
 
 - (void)didLookupPrinters:(BXPrinterController *)controller
@@ -39,7 +39,7 @@
            printer:(BXPrinter *)printer
 {
     NSLog(@"didConnect");
-    
+
     NSLog(@"=========== Information Printing Start  ===========\r\n");
     NSLog(@" * printer modelStr : %@ \r\n", printer.modelStr);
     NSLog(@" * printer address : %@ \r\n", printer.address);
@@ -82,23 +82,23 @@
 {
     CDVPluginResult* pluginResult = nil;
     NSString* ip = [command.arguments objectAtIndex:0];
-    
+
     if (_myTarget) {
         _myTarget = nil;
     }
-    
+
     _myTarget = [BXPrinter new];
     _myTarget.address = ip;
     _myTarget.port = 9100;
     _myTarget.connectionClass = BXL_CONNECTIONCLASS_WIFI;
     _pController.target = _myTarget;
     [_pController selectTarget];
-    
+
     if( NO==[_pController connect] )
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: Can't connnect to printer"];
     else
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Connection Established"];
-    
+
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
@@ -108,9 +108,9 @@
     NSLog(@"Disconnected");
     [_pController disconnect];
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Disconnection"];
-    
+
     _myTarget = nil;
-    
+
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
@@ -120,16 +120,14 @@
     NSString* text = [command.arguments objectAtIndex:0];
     NSString* alignment = [command.arguments objectAtIndex:1]; // p.32
     NSString* textSize = [command.arguments objectAtIndex:2]; // p.32
-    
+
     if (text != nil && [text length] > 0) {
         _pController.textEncoding = 0x0C; // Español
         _pController.characterSet = 16; // Español
-        // _pController.alignment = BXL_ALIGNMENT_LEFT;
-        // _pController.textSize = BXL_TS_0WIDTH| BXL_TS_1HEIGHT;
+        _pController.alignment = [ alignment integerValue ];
+        _pController.textSize = [ textSize integerValue ];
         [_pController printText:text];
-        NSLog(@"Printing: ");
-        NSLog(text);
-        // [_pController printText:@"\r\n"];
+        [_pController printText:@"\r\n"];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
     } else {
         NSLog(@"errorPrint");
@@ -184,23 +182,24 @@
 
 - (void)atomicPrint:(CDVInvokedUrlCommand*)command
 {
-    CDVPluginResult* pluginResult = nil;
     NSString* ip = [command.arguments objectAtIndex:0];
     NSString* text = [command.arguments objectAtIndex:1];
-    
+
     [self.commandDelegate runInBackground:^{
-        
+
+        CDVPluginResult* pluginResult = nil;
+
         if (_myTarget) {
             _myTarget = nil;
         }
-        
+
         _myTarget = [BXPrinter new];
         _myTarget.address = ip;
         _myTarget.port = 9100;
         _myTarget.connectionClass = BXL_CONNECTIONCLASS_WIFI;
         _pController.target = _myTarget;
         [_pController selectTarget];
-        
+
         if( NO==[_pController connect] )
         {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: Can't connnect to printer"];
@@ -209,11 +208,9 @@
             if (text != nil && [text length] > 0) {
                 _pController.textEncoding = 0x0C; // Español
                 _pController.characterSet = 16; // Español
-                // _pController.alignment = BXL_ALIGNMENT_LEFT;
-                // _pController.textSize = BXL_TS_0WIDTH| BXL_TS_1HEIGHT;
+                _pController.alignment = [ alignment integerValue ];
+                _pController.textSize = [ textSize integerValue ];
                 [_pController printText:text];
-                NSLog(@"Printing: ");
-                NSLog(text);
                 // [_pController printText:@"\r\n"];
                 if(BXL_SUCCESS == [_pController cutPaper])
                 {
@@ -224,35 +221,36 @@
                 {
                     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: Can't cut paper"];
                 }
-                
+
             } else {
                 NSLog(@"errorPrint");
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
             }
         }
-        
+        NSLog(@"Done!");
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
 }
 
 - (void)atomicOpen:(CDVInvokedUrlCommand*)command
 {
-    CDVPluginResult* pluginResult = nil;
     NSString* ip = [command.arguments objectAtIndex:0];
-    
+
     [self.commandDelegate runInBackground:^{
-        
+
+        CDVPluginResult* pluginResult = nil;
+
         if (_myTarget) {
             _myTarget = nil;
         }
-        
+
         _myTarget = [BXPrinter new];
         _myTarget.address = ip;
         _myTarget.port = 9100;
         _myTarget.connectionClass = BXL_CONNECTIONCLASS_WIFI;
         _pController.target = _myTarget;
         [_pController selectTarget];
-        
+
         if( NO==[_pController connect] )
         {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: Can't connnect to printer"];
