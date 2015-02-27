@@ -20,6 +20,7 @@
 @property (retain)	NSString		*versionStr;
 @property (retain)	NSString		*friendlyName;
 @property (retain)	NSString		*macAddress;
+@property (retain)	NSString		*bluetoothDeviceName;
 
 @property (assign)	unsigned short	port;
 @property (assign)	char			*mac;

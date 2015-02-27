@@ -16,7 +16,7 @@
 
 @property (assign)	SOCKADDR_IN		*addr;
 @property (assign)	char			*data;
-@property (assign)	int				size;
+@property (assign)	NSInteger		size;
 
 
 @end

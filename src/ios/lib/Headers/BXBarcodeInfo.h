@@ -14,12 +14,12 @@
 }
 
 
-@property (assign)  int             barNumber;
+@property (assign)  NSInteger       barNumber;
 @property (assign)	NSString		*name;
 @property (assign)	BOOL            support;
 
 
-- (id)initWithBarNumber:(int)barNum
+- (id)initWithBarNumber:(NSInteger)barNum
                    name:(NSString*)barName
                 support:(BOOL)isSupport;
 
@@ -39,7 +39,7 @@
 - (NSMutableArray*) getSuppotList;
 
 - (BOOL) clearObject;
-- (BOOL) addObjectWithBarcode:(int)barNum
+- (BOOL) addObjectWithBarcode:(NSInteger)barNum
                          name:(NSString*)barName
                       support:(BOOL)isSupport;
 @end

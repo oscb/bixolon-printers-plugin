@@ -16,7 +16,7 @@
 
 //#import "iController.h"
 
-#define __message(fmt, ...)		/*_log(fmt, ##__VA_ARGS__);	\*/\
+#define __message(fmt, ...)		/*_logNormal(fmt, ##__VA_ARGS__);	\*/\
 	if( [self.delegate respondsToSelector:@selector(message:text:)] ) \
 		[Common dispatchSelector:@selector(message:text:) \
 						  target:self.delegate \
@@ -37,9 +37,9 @@
 @property (retain, readonly)                NSString        *version;          // SDK 버전
 @property (retain, readonly)                NSString        *releaseDate;          // SDK 버전
 @property (retain, readonly)                NSString        *manufacturer;          // Manufacturer
-@property (assign, nonatomic)				int				configPassword;
-@property (assign, nonatomic)				int				AutoConnection;
-@property (assign, nonatomic)				int				barcodeSupportRange;
+@property (assign, nonatomic)				NSInteger		configPassword;
+@property (assign, nonatomic)				NSInteger		AutoConnection;
+@property (assign, nonatomic)				NSInteger		barcodeSupportRange;
 
 
 @property (assign, nonatomic)				id<BXPrinterControlDelegate>	delegate;
@@ -53,9 +53,9 @@
 @property (assign, nonatomic)				unsigned		lookupCount;		// 프린터 검색시 브로드캐스팅 횟수
 
 
-@property (assign, nonatomic)				int				alignment;
-@property (assign, nonatomic)				int				attribute;
-@property (assign, nonatomic)				int				textSize;
+@property (assign, nonatomic)				NSInteger		alignment;
+@property (assign, nonatomic)				NSInteger		attribute;
+@property (assign, nonatomic)				NSInteger		textSize;
 @property (assign, nonatomic)				char			characterSet;       // Codepage
 @property (assign, nonatomic)				char			textPosition;   
 @property (assign, nonatomic)				char			internationalCharacterSet;  //Codepage Manual Internatinal CharacterSet 내용 참조.
@@ -63,8 +63,8 @@
 
 
 
-@property (assign, nonatomic)				int				drawerPin;
-@property (assign, nonatomic)				int				drawerOpenLevel;
+@property (assign, nonatomic)				NSInteger		drawerPin;
+@property (assign, nonatomic)				NSInteger		drawerOpenLevel;
 
 @property (assign, nonatomic, readonly)     long			state;
 @property (assign, nonatomic, readonly)     long			power;
@@ -73,6 +73,7 @@
 @property (assign, nonatomic)				_BXPrinterConfigrationStruct        *config;
 @property (assign, nonatomic)				_BXPrinterSettingConfigrationStruct	*settingConfig;
 @property (assign, nonatomic)				CGFloat			pendingWaitTime;
+@property (assign, nonatomic)               BOOL            imageDitheringWithIgnoreWhite;
 
 + (BXPrinterController *)getInstance;
 
@@ -84,7 +85,7 @@
 
 // Printer 종류에 따라 프린터 객체 갱신.
 - (long) selectTarget;
-- (long) selectTarget:(int)modelID;
+- (long) selectTarget:(NSInteger)modelID;
 
 // 프린터 초기화
 - (long)initializePrinter;
@@ -93,25 +94,25 @@
 - (long)checkPrinter;
 
 // 프린터 상태 정보 얻기.
-- (long)checkPrinter:(int)mask;
+- (long)checkPrinter:(NSInteger)mask;
 
 
 // 프린터와의 TCP 연결하기/연결끊기/연결 확인
 - (BOOL)connect;
 - (void)disconnect;
-- (long)disconnectWithTimeout:(int)timeout;
+- (long)disconnectWithTimeout:(NSInteger)timeout;
 
-- (long)disconnectWithTimeout:(int)timeout
-                   afterSleep:(int)afterSleep;
+- (long)disconnectWithTimeout:(NSInteger)timeout
+                   afterSleep:(NSInteger)afterSleep;
 
 - (BOOL)isConnected;
 
-- (int)recvValue:(void *)bytes size:(int)size;
+- (NSInteger)recvValue:(void *)bytes size:(NSInteger)size;
 
 // 텍스트 처리
 - (long)printText:(NSString *)string;
-- (long)printBox:(int)width height:(int)height;
-- (long)lineFeed:(int)lines;
+- (long)printBox:(NSInteger)width height:(NSInteger)height;
+- (long)lineFeed:(NSInteger)lines;
 - (long)nextPrintPos;
 - (long)cutPaper;
 
@@ -143,14 +144,14 @@
 			  level:(long)level;
 
 // NV Images
-- (long)removeNVImage:(int)address;
+- (long)removeNVImage:(NSInteger)address;
 - (long)removeAllNVImages;
 - (long)nvImageList:(NSArray **)images;
-- (long)downloadNVImage:(int)address withImage:(UIImage *)image;
-- (long)downloadNVImage:(int)address withImage:(UIImage *)image
+- (long)downloadNVImage:(NSInteger)address withImage:(UIImage *)image;
+- (long)downloadNVImage:(NSInteger)address withImage:(UIImage *)image
 				  width:(long)width 
 				  level:(long)level;
-- (long)printNVImage:(int)address;
+- (long)printNVImage:(NSInteger)address;
 
 
 // MSR 카드 처리
@@ -159,7 +160,7 @@
 - (long)msrReadCancelEx;
 - (BOOL)msrIsReady;
 - (long)msrReadTrack:(NSData **)data1 data2:(NSData **)data2 data3:(NSData **)data3;
-- (long)msrGetTrack:(int)track response:(NSData **)response;
+- (long)msrGetTrack:(NSInteger)track response:(NSData **)response;
 - (long)msrReadFullTrack:(NSData **)response;
 
 // IC 카드 처리
@@ -170,7 +171,7 @@
 
 // Direct IO 처리
 - (long)directIO:(NSData *)request 
-	requiredSize:(int)requiredSize 
+	requiredSize:(NSInteger)requiredSize
 		response:(NSData **)response;
 
 // Cash Drawer 처리
@@ -202,12 +203,12 @@
 
 // SetObject;
 
-- (void) setConfigPassword:(int)pw;
+- (void) setConfigPassword:(NSInteger)pw;
 - (void) setLookupDuration:(CGFloat)duration;
 - (void) setLookupCount:(unsigned)count;
-- (void) setAlignment:(int)set;
-- (void) setAttribute:(int)set;
-- (void) setTextSize:(int)size;
+- (void) setAlignment:(NSInteger)set;
+- (void) setAttribute:(NSInteger)set;
+- (void) setTextSize:(NSInteger)size;
 - (void) setCharacterSet:(char)set;
 - (void) setTextPosition:(char)position;
 - (void) setInternationalCharacterSet:(char)set;
@@ -218,13 +219,13 @@
 
 
 // setPageModeMode
-- (long)setPageArea:(int)startingX
-          startingY:(int)startingY
-              width:(int)width
-             height:(int)height;
+- (long)setPageArea:(NSInteger)startingX
+          startingY:(NSInteger)startingY
+              width:(NSInteger)width
+             height:(NSInteger)height;
 
-- (long)setLeftPosition:(int)positionX;
-- (long)setVerticalPosition:(int)positionY;
+- (long)setLeftPosition:(NSInteger)positionX;
+- (long)setVerticalPosition:(NSInteger)positionY;
 
 - (long)printDataInPageMode;
 

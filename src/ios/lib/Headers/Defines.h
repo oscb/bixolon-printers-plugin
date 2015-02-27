@@ -133,30 +133,30 @@ typedef struct
 {
     _BXPrinterMSW       msw[12];
 
-    int                 settingByUseMSW;
-    int                 printingDensity;
-    int                 printingSpeed;
-    int                 codePage;
-    int                 printerEmulation;
-    int                 partialCuttingLevel;
-    int                 powerSavingTime;
+    NSInteger                  settingByUseMSW;
+    NSInteger                 printingDensity;
+    NSInteger                 printingSpeed;
+    NSInteger                 codePage;
+    NSInteger                 printerEmulation;
+    NSInteger                 partialCuttingLevel;
+    NSInteger                 powerSavingTime;
     
-    int                 labelMode;
-    int                 fontType;
-    int                 beepForPaperEnd;
-    int                 beepForLowBattery;
-    int                 blackMarkSensor;
+    NSInteger                 labelMode;
+    NSInteger                 fontType;
+    NSInteger                 beepForPaperEnd;
+    NSInteger                 beepForLowBattery;
+    NSInteger                 blackMarkSensor;
     
     
-    int                 msrTriggerMode;
-    int                 msrDataMode;
+    NSInteger                 msrTriggerMode;
+    NSInteger                 msrDataMode;
     
-    int                 doubleByteCharacterMode;
-    int                 powerOffTime;
+    NSInteger                 doubleByteCharacterMode;
+    NSInteger                 powerOffTime;
     
-    int                 paperSaveMode;
-    int                 paperSaveModeCuttingCorrection;
-    int                 print2InchMode;
+    NSInteger                 paperSaveMode;
+    NSInteger                 paperSaveModeCuttingCorrection;
+    NSInteger                 print2InchMode;
     
 
 } _BXPrinterSettingConfigrationStruct;
